@@ -1,151 +1,83 @@
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../polymer/polymer.html">
 
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../paper-date-picker/paper-date-picker.html">
+<link rel="import" href="../paper-date-picker/paper-date-picker-dialog-style.html">
+<link rel="import" href="../things-button/things-button.html">
+
 <!--
-An element providing a solution to no problem in particular.
+`<things-date-picker>` Things Date Picker
 
-Example:
-
-    <things-date-picker></things-date-picker>
-
-Example:
-
-    <things-date-picker>
-      <h2>Hello things-date-picker</h2>
+  Example
+    
+    <things-date-picker 
+      label="Date Picker" 
+      locale="ko" 
+      read-format="YYYY-MM-DD">
     </things-date-picker>
 
-@demo demo/index.html
-@hero hero.svg
+@demo demo/demo-things-date-picker.html
 -->
-
 <dom-module id="things-date-picker">
-  <template>
-    <style>
-      :host {
-        display: block;
-        box-sizing: border-box;
-      }
+	<template>
+		<input type="text" name="{{name}}" value={{selectedDate}} readOnly placeholder="{{label}}">
+		<paper-icon-button class="Navigation-icon" icon="date-range" on-tap="showDatePicker"></paper-icon-button>
+    <paper-dialog id="dateDialog" modal class="paper-date-picker-dialog">
+      <paper-date-picker date="{{date}}"></paper-date-picker>
+      <div class="buttons">
+        <paper-button raised dialog-confirm on-tap="selectDate">Select</paper-button>
+        <paper-button raised dialog-dismiss>Cancel</paper-button>
+      </div>
+    </paper-dialog>
 
-      .author img {
-        display: block;
-        float: left;
-        margin-right: 5px;
-        max-height: 100px;
-        max-width: 100px;
-      }
-    </style>
-
-    <h1>&lt;things-date-picker&gt;</h1>
-    <content></content>
-    <p class="author">
-      <img src$="{{author.image}}">
-      Cheers,<br/>
-      <span class="name">{{author.name}}</span>
-    </p>
   </template>
 
-  <script>
-    Polymer({
-      is: 'things-date-picker',
+  <script type='text/javascript'>
+  	(function() {
+      Polymer({
+        is: 'things-date-picker',
 
-      properties: {
-        /**
-         * `fancy` indicates that the element should don a monocle and tophat,
-         * while checking its pocket watch.
-         */
-        fancy: Boolean,
-
-        /**
-         * Describes the author of the element, but is really just an excuse to
-         * show off JSDoc annotations.
-         *
-         * @type {{name: string, image: string}}
-         */
-        author: {
-          type: Object,
-          // Use `value` to provide a default value for a property, by setting it
-          // on your element's prototype.
-          //
-          // If you provide a function, as we do here, Polymer will call that
-          // _per element instance_.
-          //
-          // We do that to ensure that each element gets its own copy of the
-          // value, rather than having it shared across all instances (via the
-          // prototype).
-          value: function() {
-            return {
-              name:  'Dimitri Glazkov',
-              image: 'http://addyosmani.com/blog/wp-content/uploads/2013/04/unicorn.jpg',
-            };
-          }
+        properties: {
+          /**
+           * Date picker의 기준이 되는 locale을 설정한다.
+           */
+          locale: {
+            type: String,
+            notify: true,
+            value: 'en'
+          },
+          /**
+           * date의 읽기전용 format을 설정한다.
+           */
+          readFormat: {
+            type: String,
+            notify: true,
+            value: 'YYYY-MM-DD'
+          },
+          /**
+           * date의 쓰기전용 format을 설정한다.
+           */
+          writeFormat: {
+            type: String,
+            value: 'YYYY-MM-DD'
+          }       
         },
-      },
+        /**
+         * 버튼 클릭시 Date picker를 dialog 타입으로 나타나게 한다.
+         */
+        showDatePicker: function() {
+          this.$.dateDialog.toggle();  
+        },
+        /**
+         * date picker에서 날짜를 결정하면 해당 날짜를 selectedDate에 초기화 한다.
+         */
+        selectDate: function() {
+          // http://momentjs.com/
+          //this.selectedDate = moment(this.date).locale('zh-cn').format('LL');
+          this.selectedDate = moment(this.date).locale(this.locale).format(this.readFormat);
+        }
 
-      // Element Lifecycle
-
-      ready: function() {
-        // `ready` is called after all elements have been configured, but
-        // propagates bottom-up. This element's children are ready, but parents
-        // are not.
-        //
-        // This is the point where you should make modifications to the DOM (when
-        // necessary), or kick off any processes the element wants to perform.
-      },
-
-      attached: function() {
-        // `attached` fires once the element and its parents have been inserted
-        // into a document.
-        //
-        // This is a good place to perform any work related to your element's
-        // visual state or active behavior (measuring sizes, beginning animations,
-        // loading resources, etc).
-      },
-
-      detached: function() {
-        // The analog to `attached`, `detached` fires when the element has been
-        // removed from a document.
-        //
-        // Use this to clean up anything you did in `attached`.
-      },
-
-      // Element Behavior
-
-      /**
-       * Sometimes it's just nice to say hi.
-       *
-       * @param {string} greeting A positive greeting.
-       * @return {string} The full greeting.
-       */
-      sayHello: function(greeting) {
-        var response = greeting || 'Hello World!';
-        return 'things-date-picker says, ' + response;
-      },
-
-      /**
-       * The `things-date-picker-lasers` event is fired whenever `fireLasers` is called.
-       *
-       * @event things-date-picker-lasers
-       * @detail {{sound: String}}
-       */
-
-      /**
-       * Attempt to destroy this element's enemies with a beam of light!
-       *
-       * Or, at least, dispatch an event in the vain hope that someone else will
-       * do the zapping.
-       */
-      fireLasers: function() {
-        this.fire('things-date-picker-lasers', {sound: 'Pew pew!'});
-      }
-    });
+      })
+  	})();
   </script>
 </dom-module>
