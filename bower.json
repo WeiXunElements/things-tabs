@@ -24,7 +24,7 @@
     "paper-icon-button": "^1.0.7",
     "paper-time-picker": "bendavis78/paper-time-picker#^1.1.2",
     "paper-date-picker": "bendavis78/paper-date-picker#^1.1.3",
-    "things-msg-box-behavior": "ThingsElements/things-msg-box-behavior#^0.0.1"
+    "things-msg-box-behavior": "ThingsElements/things-msg-box-behavior"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
