@@ -10,7 +10,7 @@
     "polymer",
     "seed"
   ],
-  "main": "things-button.html",
+  "main": "things-date-picker.html",
   "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/ThingsElements/seed-element/",
   "ignore": [
