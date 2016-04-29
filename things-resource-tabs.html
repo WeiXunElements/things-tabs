@@ -141,11 +141,11 @@ Example:
         },
 
         /**
-         * resource member url, resource url과 resourceId로 memberResourceUrl을 구성한다.
+         * resource member url, resource url로 memberResourceUrl을 구성한다.
          */
         memberResourceUrl: {
           type: String,
-          computed: '_computeMemberResourceUrl(resourceUrl,resourceId)'
+          computed: '_computeMemberResourceUrl(resourceUrl)'
         },
 
         /**
@@ -284,11 +284,10 @@ Example:
        * resourceUrl로 resource member url을 생성
        *
        * @param {String} resourceUrl
-       * @param {String} resourceId
        * @return {String} resource member URL
        */
-      _computeMemberResourceUrl: function(resourceUrl, resourceId) {
-        return resourceUrl + '/' + resourceId;
+      _computeMemberResourceUrl: function(resourceUrl) {
+        return resourceUrl + '/:id';
       },
 
       /**
