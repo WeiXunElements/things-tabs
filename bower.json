@@ -20,10 +20,10 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.2.0",
     "paper-tabs": "PolymerElements/paper-tabs#^1.5.0",
-    "things-meta": "ThingsElements/things-meta#^0.0.1",
-    "things-view-open-behavior": "ThingsElements/things-view-open-behavior#^0.0.1",
-    "things-attached-file": "ThingsElements/things-attached-file#^0.0.1",
-    "things-extension": "ThingsElements/things-extension#^0.0.1"
+    "things-meta": "ThingsElements/things-meta",
+    "things-view-open-behavior": "ThingsElements/things-view-open-behavior",
+    "things-attached-file": "ThingsElements/things-attached-file",
+    "things-extension": "ThingsElements/things-extension"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
