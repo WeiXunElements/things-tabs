@@ -229,11 +229,9 @@ Example:
        * fire element id+selected event with page element detail
        */
       _onPageSelected: function(event) {
-        if(!this.resource) return;
-
         var detailItemView = event.detail.item;
-        detailItemView.loadDetailData(this.resource);       
-        this.fire(detailItemView.id + '-selected', detailItemView);
+        detailItemView.resource = this.resource;
+        this.fire('things-detail-view-selected', this.resource, { node : detailItemView });
       },
 
       /**
