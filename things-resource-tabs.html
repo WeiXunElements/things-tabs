@@ -1,15 +1,15 @@
 <!--
 @license
-Copyright © HatioLab Inc. All rights reserved.
+Copyright © 2015-2021 Shenzhen Weixun All rights reserved.
 -->
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-tabs/paper-tabs.html">
-<link rel="import" href="../iron-pages/iron-pages.html">
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../paper-tabs/paper-tabs.html" />
+<link rel="import" href="../iron-pages/iron-pages.html" />
 
-<link rel="import" href="../things-meta/things-detail-form-meta-behavior.html">
-<link rel="import" href="../things-view-open-behavior/things-view-open-behavior.html">
-<link rel="import" href="../things-attached-file/things-attached-file.html">
-<link rel="import" href="../things-extension/things-extension.html">
+<link rel="import" href="../things-meta/things-detail-form-meta-behavior.html" />
+<link rel="import" href="../things-view-open-behavior/things-view-open-behavior.html" />
+<link rel="import" href="../things-attached-file/things-attached-file.html" />
+<link rel="import" href="../things-extension/things-extension.html" />
 
 <!--
 `<things-tabs>` Things Tabs
@@ -47,18 +47,13 @@ Copyright © HatioLab Inc. All rights reserved.
 
 <dom-module id="things-resource-tabs">
   <template>
-
     <style>
       :host {
         display: block;
       }
     </style>
 
-    <things-ajax
-      id="get-resource"
-      method="GET"
-      resource-url="[[memberResourceUrl]]"
-      last-response="{{resource}}">
+    <things-ajax id="get-resource" method="GET" resource-url="[[memberResourceUrl]]" last-response="{{resource}}">
     </things-ajax>
 
     <h2>[[title]]</h2>
@@ -74,38 +69,32 @@ Copyright © HatioLab Inc. All rights reserved.
         resource-url="[[memberResourceUrl]]"
         resource="{{resource}}"
         form-fields="[[formFields]]"
-        remove-fields-on-save="[[removeFieldsOnSave]]">
+        remove-fields-on-save="[[removeFieldsOnSave]]"
+      >
       </things-resource-form>
 
-      <template is="dom-if" if={{attachable}}>
+      <template is="dom-if" if="{{attachable}}">
         <things-attached-file
           id="attachments"
           target-url="upload_resource"
           resource-type="[[resourceType]]"
-          resource-id="{{resourceId}}">
+          resource-id="{{resourceId}}"
+        >
         </things-attached-file>
       </template>
 
-      <template is="dom-if" if={{propExtensible}}>
-        <things-extension
-          id="ext-properties"
-          resource-type="[[resourceType]]"
-          resource-id="{{resourceId}}">
+      <template is="dom-if" if="{{propExtensible}}">
+        <things-extension id="ext-properties" resource-type="[[resourceType]]" resource-id="{{resourceId}}">
         </things-extension>
       </template>
     </iron-pages>
-
   </template>
 
   <script>
     Polymer({
-
       is: 'things-resource-tabs',
 
-      behaviors: [
-        Things.DetailFormMetaBehavior,
-        Things.ViewOpenBehavior
-      ],
+      behaviors: [Things.DetailFormMetaBehavior, Things.ViewOpenBehavior],
 
       properties: {
         /**
@@ -114,7 +103,7 @@ Copyright © HatioLab Inc. All rights reserved.
          * @type {String}
          */
         title: {
-          type: String
+          type: String,
         },
 
         /**
@@ -124,7 +113,7 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         metaData: {
           type: Array,
-          observer: '_parseMetaData'
+          observer: '_parseMetaData',
         },
 
         /**
@@ -133,7 +122,7 @@ Copyright © HatioLab Inc. All rights reserved.
          * @type {String}
          */
         resourceType: {
-          type: String
+          type: String,
         },
 
         /**
@@ -142,7 +131,7 @@ Copyright © HatioLab Inc. All rights reserved.
          * @type {String}
          */
         resourceId: {
-          type: String
+          type: String,
         },
 
         /**
@@ -152,7 +141,7 @@ Copyright © HatioLab Inc. All rights reserved.
          * @type {String}
          */
         resourceUrl: {
-          type: String
+          type: String,
         },
 
         /**
@@ -162,7 +151,7 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         memberResourceUrl: {
           type: String,
-          computed: '_computeMemberResourceUrl(resourceUrl)'
+          computed: '_computeMemberResourceUrl(resourceUrl)',
         },
 
         /**
@@ -172,7 +161,7 @@ Copyright © HatioLab Inc. All rights reserved.
          * @type {String}
          */
         resource: {
-          type: Object
+          type: Object,
         },
 
         /**
@@ -181,7 +170,7 @@ Copyright © HatioLab Inc. All rights reserved.
          * @type {Array}
          */
         formFields: {
-          type: Array
+          type: Array,
         },
 
         /**
@@ -191,7 +180,7 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         removeFieldsOnSave: {
           type: Array,
-          value: ['creator', 'updater', 'creator_id', 'updater_id', 'created_at', 'updated_at']
+          value: ['creator', 'updater', 'creator_id', 'updater_id', 'created_at', 'updated_at'],
         },
 
         /**
@@ -201,7 +190,7 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         attachable: {
           type: Boolean,
-          value: false
+          value: false,
         },
 
         /**
@@ -211,7 +200,7 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         propExtensible: {
           type: Boolean,
-          Value: false
+          Value: false,
         },
 
         /**
@@ -221,7 +210,7 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         currentTabIdx: {
           type: Number,
-          value: 0
+          value: 0,
         },
 
         /**
@@ -229,21 +218,23 @@ Copyright © HatioLab Inc. All rights reserved.
          */
         _panels: {
           type: Array,
-          value: [ {
-            title: 'Basic Info.',
-            elementId: 'things-resource-form'
-          } ]
-        }
+          value: [
+            {
+              title: 'Basic Info.',
+              elementId: 'things-resource-form',
+            },
+          ],
+        },
       },
 
       observers: [
         '_onResourceChanged(resource)',
         '_onAttachableChanged(_panels, attachable)',
-        '_onPropExtensibleChanged(_panels, propExtensible)'
+        '_onPropExtensibleChanged(_panels, propExtensible)',
       ],
 
       listeners: {
-        'tabPages.iron-select': '_onPageSelected'
+        'tabPages.iron-select': '_onPageSelected',
       },
 
       /**
@@ -251,7 +242,7 @@ Copyright © HatioLab Inc. All rights reserved.
        * *******
        * @param {Number} currentTabIdx
        */
-      setActiveTab: function(currentTabIdx) {
+      setActiveTab: function (currentTabIdx) {
         this.currentTabIdx = currentTabIdx;
       },
 
@@ -259,10 +250,10 @@ Copyright © HatioLab Inc. All rights reserved.
        * fire element id+selected event with page element detail
        * *******
        */
-      _onPageSelected: function(event) {
+      _onPageSelected: function (event) {
         var detailItemView = event.detail.item;
         detailItemView.resource = this.resource;
-        this.fire('things-detail-view-selected', this.resource, { node : detailItemView });
+        this.fire('things-detail-view-selected', this.resource, { node: detailItemView });
       },
 
       /**
@@ -270,8 +261,8 @@ Copyright © HatioLab Inc. All rights reserved.
        *
        * @param {Object} resource
        */
-      _onResourceChanged: function(resource) {
-        if(resource && resource.id) {
+      _onResourceChanged: function (resource) {
+        if (resource && resource.id) {
           this.resourceId = resource.id;
           this.currentTabIdx = 0;
         }
@@ -281,13 +272,13 @@ Copyright © HatioLab Inc. All rights reserved.
        * add attachment panel
        * @param {Boolean} attachable
        */
-      _onAttachableChanged: function(attachable) {
-        if(attachable) {
-          var hasAttachs = this['_panels'].filter(function(item) {
+      _onAttachableChanged: function (attachable) {
+        if (attachable) {
+          var hasAttachs = this['_panels'].filter(function (item) {
             return item.elementId == 'things-attached-file';
           });
 
-          if(!hasAttachs || hasAttachs.length == 0) {
+          if (!hasAttachs || hasAttachs.length == 0) {
             this.push('_panels', { title: 'Attachments', elementId: 'things-attached-file' });
           }
         }
@@ -297,13 +288,13 @@ Copyright © HatioLab Inc. All rights reserved.
        * add extension panel
        * @param {Boolean} propExtensible
        */
-      _onPropExtensibleChanged: function(propExtensible) {
-        if(propExtensible) {
-          var hasExts = this['_panels'].filter(function(item) {
+      _onPropExtensibleChanged: function (propExtensible) {
+        if (propExtensible) {
+          var hasExts = this['_panels'].filter(function (item) {
             return item.elementId == 'things-extension';
           });
 
-          if(!hasExts || hasExts.length == 0) {
+          if (!hasExts || hasExts.length == 0) {
             this.push('_panels', { title: 'Properties', elementId: 'things-extension' });
           }
         }
@@ -315,7 +306,7 @@ Copyright © HatioLab Inc. All rights reserved.
        * @param {String} resourceUrl
        * @return {String} resource member URL
        */
-      _computeMemberResourceUrl: function(resourceUrl) {
+      _computeMemberResourceUrl: function (resourceUrl) {
         return resourceUrl + '/:id';
       },
 
@@ -324,8 +315,8 @@ Copyright © HatioLab Inc. All rights reserved.
        *
        * @param {Array} metaDataList
        */
-      _parseMetaData: function(metaDataList) {
-        if(!metaDataList || metaDataList.length == 0) return;
+      _parseMetaData: function (metaDataList) {
+        if (!metaDataList || metaDataList.length == 0) return;
         this.formFields = this._parseResourceFormFields(metaDataList);
       },
 
@@ -334,15 +325,14 @@ Copyright © HatioLab Inc. All rights reserved.
        *********
        * @param {Object} resource
        */
-      showDetailView: function(resource) {
-        if(resource) {
+      showDetailView: function (resource) {
+        if (resource) {
           this.resourceId = resource.id;
           this.$['get-resource'].generateRequest();
         }
 
         this.openPopupView(this, true);
-      }
-
+      },
     });
   </script>
 </dom-module>
