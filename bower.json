@@ -1,6 +1,6 @@
 {
   "name": "things-tabs",
-  "version": "v2.2.1",
+  "version": "v2.2.2",
   "authors": [
     "Shenzhen Weixun"
   ],
@@ -18,10 +18,10 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.2.0",
     "paper-tabs": "PolymerElements/paper-tabs#^1.5.0",
-    "things-meta": "ThingsElements/things-meta",
-    "things-view-open-behavior": "ThingsElements/things-view-open-behavior",
-    "things-attached-file": "ThingsElements/things-attached-file",
-    "things-extension": "ThingsElements/things-extension"
+    "things-meta": "WeiXunElements/things-meta",
+    "things-view-open-behavior": "WeiXunElements/things-view-open-behavior",
+    "things-attached-file": "WeiXunElements/things-attached-file",
+    "things-extension": "WeiXunElements/things-extension"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
